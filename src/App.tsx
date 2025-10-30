@@ -1,34 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import styled from 'styled-components'
+import { ThemeToggle } from './components/theme/ThemeToggle/ThemeToggle'
+import { Filters } from './components/catalog/Filters/Filters'
+import { Sort } from './components/catalog/Sort/Sort'
+import { ProductGrid } from './components/catalog/ProductGrid/ProductGrid'
+
+const Page = styled.div`
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  width: 100%;
+`
+
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const Layout = styled.div`
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+`
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Page>
+      <Header>
+        <h2 style={{ margin: 0 }}>Веломагазин</h2>
+        <ThemeToggle />
+      </Header>
+      <Layout>
+        <Filters />
+        <div style={{ display: 'grid', gap: 12 }}>
+          <Sort />
+          <ProductGrid />
+        </div>
+      </Layout>
+    </Page>
   )
 }
 
