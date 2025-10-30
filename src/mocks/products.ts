@@ -1,4 +1,4 @@
-import { CatalogFilters, CatalogSort, PaginatedResult, Product } from '../types';
+import { type CatalogFilters, type CatalogSort, type PaginatedResult, type Product } from '../types';
 
 const catalog: Product[] = [
     {

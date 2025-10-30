@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { CatalogFilters, CatalogSort, PaginatedResult, Product } from '../types';
+import { type CatalogFilters, type CatalogSort, type PaginatedResult, type Product } from '../types';
 import { fetchProducts } from '../api/products';
 
 type CatalogState = {

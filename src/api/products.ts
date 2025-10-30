@@ -1,5 +1,5 @@
 import { http } from './http';
-import { CatalogFilters, CatalogSort, PaginatedResult, Product } from '../types';
+import { type CatalogFilters, type CatalogSort, type PaginatedResult, type Product } from '../types';
 import { fetchProductsMock } from '../mocks/products';
 
 type FetchProductsParams = {

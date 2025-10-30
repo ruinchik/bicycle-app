@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Product } from '../../../types';
+import { type Product } from '../../../types';
 import { useCartStore } from '../../../store/cartStore';
 
 const Card = styled.article`
