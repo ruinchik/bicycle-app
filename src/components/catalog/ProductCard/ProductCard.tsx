@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Product } from '../../types';
+import { Product } from '../../../types';
 
 const Card = styled.article`
     display: grid;

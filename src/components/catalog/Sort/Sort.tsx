@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useCatalogStore } from '../../store/catalogStore';
+import { useCatalogStore } from '../../../store/catalogStore';
 
 const Wrap = styled.div`
     display: flex;

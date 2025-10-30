@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { useCatalogStore } from '../../store/catalogStore';
+import { useCatalogStore } from '../../../store/catalogStore';
 import { ProductCard } from '../ProductCard/ProductCard';
 
 const Grid = styled.section`

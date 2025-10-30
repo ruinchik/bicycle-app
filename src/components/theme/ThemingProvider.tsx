@@ -1,6 +1,6 @@
-import { ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { useThemeStore } from '../store/themeStore';
+import { useThemeStore } from '../../store/themeStore';
 import { darkTheme, lightTheme } from './theme';
 
 type Props = { children: ReactNode };

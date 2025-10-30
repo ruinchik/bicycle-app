@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useCatalogStore } from '../../store/catalogStore';
+import { useCatalogStore } from '../../../store/catalogStore';
 
 const Bar = styled.aside`
     display: grid;
