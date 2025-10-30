@@ -16,11 +16,11 @@ const Top = styled.div`
 `;
 
 export function ProductGrid() {
-    const { items, total, page, pageSize, isLoading, error, load, setPage } = useCatalogStore();
+    const { items, total, page, pageSize, isLoading, error, load, setPage, filters, sort } = useCatalogStore();
 
     useEffect(() => {
         load();
-    }, [load]);
+    }, [load, page, pageSize, filters, sort]);
 
     if (error) return <div>Ошибка: {error}</div>;
     return (

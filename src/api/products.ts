@@ -1,5 +1,6 @@
 import { http } from './http';
 import { CatalogFilters, CatalogSort, PaginatedResult, Product } from '../types';
+import { fetchProductsMock } from '../mocks/products';
 
 type FetchProductsParams = {
     page?: number;
@@ -22,6 +23,10 @@ export async function fetchProducts(params: FetchProductsParams = {}): Promise<P
     if (sort) {
         query.set('sortKey', sort.key);
         query.set('sortOrder', sort.order);
+    }
+    const useMocks = (import.meta.env.VITE_USE_MOCKS as string | undefined) === 'true' || !import.meta.env.VITE_API_URL;
+    if (useMocks) {
+        return fetchProductsMock({ page, pageSize, filters, sort });
     }
     return http.get(`/products?${query.toString()}`);
 }
