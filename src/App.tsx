@@ -4,6 +4,7 @@ import { ThemeToggle } from './components/theme/ThemeToggle/ThemeToggle'
 import { Filters } from './components/catalog/Filters/Filters'
 import { Sort } from './components/catalog/Sort/Sort'
 import { ProductGrid } from './components/catalog/ProductGrid/ProductGrid'
+import { CartIcon } from './components/cart/CartIcon/CartIcon'
 
 const Page = styled.div`
   display: grid;
@@ -29,7 +30,10 @@ function App() {
     <Page>
       <Header>
         <h2 style={{ margin: 0 }}>Веломагазин</h2>
-        <ThemeToggle />
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <ThemeToggle />
+          <CartIcon />
+        </div>
       </Header>
       <Layout>
         <Filters />
