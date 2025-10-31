@@ -1,4 +1,4 @@
-import { useCatalogStore } from '../../../store/catalogStore';
+import { useCatalogStore } from '../../../stores/catalogStore';
 import { type SortKey, type SortOrder } from '../../../types';
 import './Sort.css';
 

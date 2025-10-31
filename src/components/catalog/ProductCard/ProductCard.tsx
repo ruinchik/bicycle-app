@@ -1,61 +1,59 @@
-import styled from 'styled-components';
+import { useState } from 'react';
+import { useCartStore } from '../../../stores';
 import { type Product } from '../../../types';
-import { useCartStore } from '../../../store/cartStore';
+import './ProductCard.css';
 
-const Card = styled.article`
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    gap: 10px;
-    padding: 12px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-`;
-
-const Img = styled.img`
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-`;
-
-const Title = styled.h3`
-    margin: 0;
-    font-size: 16px;
-`;
-
-const Price = styled.div`
-    font-weight: 700;
-`;
-const Meta = styled.div`
-    display: flex;
-    gap: 8px;
-    color: var(--muted-text);
-    font-size: 12px;
-`;
-
-type Props = { product: Product };
+type Props = {
+    product: Product;
+};
 
 export function ProductCard({ product }: Props) {
+    const [isAdded, setIsAdded] = useState(false);
     const addItem = useCartStore((s) => s.addItem);
+
+    const handleAddToCart = () => {
+        addItem(product, 1);
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 1000);
+    };
+
     return (
-        <Card>
-            <Img src={product.imageUrl} alt={product.title} />
-            <div>
-                <Title>{product.title}</Title>
-                <div style={{ color: 'var(--muted-text)', fontSize: 12 }}>{product.description}</div>
-                <Meta>
-                    <span>Продано {product.popularity.toLocaleString()}</span>
-                    <span>•</span>
-                    <span>Рейтинг {product.rating.toFixed(1)}</span>
-                </Meta>
+        <div className="product-card">
+            <div className="product-card__image">
+                <img src={product.imageUrl} alt={product.title} />
+                {product.isNew && <span className="product-card__badge">Новинка</span>}
+                {!product.inStock && <div className="product-card__out-of-stock">Нет в наличии</div>}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Price>{product.price.toLocaleString()} ₽</Price>
-                <button onClick={() => addItem(product)}>В корзину</button>
+            
+            <div className="product-card__content">
+                <h3 className="product-card__title">{product.title}</h3>
+                <p className="product-card__description">{product.description}</p>
+                
+                <div className="product-card__meta">
+                    <span className="product-card__type">{product.type}</span>
+                    <span className="product-card__manufacturer">{product.manufacturer}</span>
+                    <span className="product-card__size">Размер: {product.frameSize}</span>
+                </div>
+
+                <div className="product-card__rating">
+                    <span className="product-card__rating-stars">
+                        {'★'.repeat(Math.round(product.rating))}
+                        {'☆'.repeat(5 - Math.round(product.rating))}
+                    </span>
+                    <span>({product.rating})</span>
+                </div>
+
+                <div className="product-card__footer">
+                    <div className="product-card__price">{product.price.toLocaleString()} ₽</div>
+                    <button 
+                        className={`product-card__add-btn ${isAdded ? 'product-card__add-btn--added' : ''}`}
+                        onClick={handleAddToCart}
+                        disabled={!product.inStock || isAdded}
+                    >
+                        {isAdded ? '✓ Добавлено' : (product.inStock ? 'В корзину' : 'Нет в наличии')}
+                    </button>
+                </div>
             </div>
-        </Card>
+        </div>
     );
 }
-
-

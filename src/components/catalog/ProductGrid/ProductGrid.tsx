@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useCatalogStore } from '../../../store/catalogStore';
+import { useCatalogStore } from '../../../stores/catalogStore';
 import { ProductCard } from '../ProductCard/ProductCard';
 import './ProductGrid.css';
 

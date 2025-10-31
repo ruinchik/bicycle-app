@@ -1,4 +1,4 @@
-import { useThemeStore } from '../../../store/themeStore';
+import { useThemeStore } from '../../../stores/themeStore';
 import './ThemeToggle.css';
 
 export function ThemeToggle() {

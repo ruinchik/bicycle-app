@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useCatalogStore } from '../../../store/catalogStore';
+import { useCatalogStore } from '../../../stores/catalogStore';
 import './Search.css';
 
 export function Search() {

@@ -1,4 +1,4 @@
-import { useCatalogStore } from '../../../store/catalogStore';
+import { useCatalogStore } from '../../../stores/catalogStore';
 import './Filters.css';
 
 export function Filters() {
