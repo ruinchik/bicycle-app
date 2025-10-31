@@ -91,8 +91,16 @@ const catalog: Product[] = [
 function applyFilters(items: Product[], filters?: CatalogFilters) {
     if (!filters) return items;
     return items.filter((p) => {
+        // Поиск по названию и описанию (если filters.manufacturer используется для поиска)
+        if (filters.manufacturer) {
+            const searchTerm = filters.manufacturer.toLowerCase();
+            const matchesTitle = p.title.toLowerCase().includes(searchTerm);
+            const matchesDescription = p.description.toLowerCase().includes(searchTerm);
+            const matchesManufacturer = p.manufacturer.toLowerCase().includes(searchTerm);
+            if (!matchesTitle && !matchesDescription && !matchesManufacturer) return false;
+        }
+        
         if (filters.type && p.type !== filters.type) return false;
-        if (filters.manufacturer && !p.manufacturer.toLowerCase().includes(filters.manufacturer.toLowerCase())) return false;
         if (filters.frameSize && p.frameSize !== filters.frameSize) return false;
         if (filters.price?.min != null && p.price < filters.price.min) return false;
         if (filters.price?.max != null && p.price > filters.price.max) return false;
