@@ -1,10 +1,3 @@
-import { type ReactNode, useEffect } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { useThemeStore } from '../../store/themeStore';
-import { darkTheme, lightTheme } from './theme';
-
-type Props = { children: ReactNode };
-
 const mapToCssVars = (theme: Record<string, string>) => ({
     '--bg': theme.background,
     '--surface': theme.surface,
@@ -12,21 +5,10 @@ const mapToCssVars = (theme: Record<string, string>) => ({
     '--muted-text': theme.mutedText,
     '--primary': theme.primary,
     '--border': theme.border,
+    '--accent': theme.accent,
+    '--success': theme.success,
+    '--warning': theme.warning,
+    '--error': theme.error,
 });
-
-export function ThemingProvider({ children }: Props) {
-    const mode = useThemeStore((s) => s.mode);
-    const theme = mode === 'dark' ? darkTheme : lightTheme;
-
-    useEffect(() => {
-        const vars = mapToCssVars(theme as Record<string, string>);
-        const root = document.documentElement;
-        Object.entries(vars).forEach(([key, value]) => {
-            root.style.setProperty(key, value);
-        });
-    }, [theme]);
-
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
-}
 
 

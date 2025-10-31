@@ -23,7 +23,7 @@ export type CatalogFilters = {
     price?: PriceRange;
     frameSize?: string;
     inStock?: boolean;
-};
+}
 
 export type SortKey = 'price' | 'popularity' | 'rating' | 'isNew';
 export type SortOrder = 'asc' | 'desc';

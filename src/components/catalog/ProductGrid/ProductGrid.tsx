@@ -1,48 +1,46 @@
-import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useCatalogStore } from '../../../store/catalogStore';
 import { ProductCard } from '../ProductCard/ProductCard';
-
-const Grid = styled.section`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-`;
-
-const Top = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
+import './ProductGrid.css';
 
 export function ProductGrid() {
-    const { items, total, page, pageSize, isLoading, error, load, setPage, filters, sort } = useCatalogStore();
+    const { items, total, page, pageSize, isLoading, error, load, setPage } = useCatalogStore();
 
     useEffect(() => {
         load();
-    }, [load, page, pageSize, filters, sort]);
+    }, [load]);
 
-    if (error) return <div>Ошибка: {error}</div>;
+    if (error) {
+        return <div className="product-grid__error">Ошибка: {error}</div>;
+    }
+
     return (
         <div>
-            <Top>
-                <div>Найдено: {total}</div>
-                {isLoading && <div>Загрузка…</div>}
-            </Top>
-            <Grid>
-                {items.map((p) => (
-                    <ProductCard key={p.id} product={p} />
+            <div className="product-grid__header">
+                <div className="product-grid__total">Найдено: {total}</div>
+                {isLoading && <div className="product-grid__loading">Загрузка...</div>}
+            </div>
+            
+            <div className="product-grid">
+                {items.map((product) => (
+                    <ProductCard key={product.id} product={product} />
                 ))}
-            </Grid>
+            </div>
+
             {total > pageSize && (
-                <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-                    <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+                <div className="product-grid__pagination">
+                    <button 
+                        className="product-grid__pagination-btn"
+                        disabled={page === 1} 
+                        onClick={() => setPage(page - 1)}
+                    >
                         Назад
                     </button>
-                    <span>
-                        Стр. {page} / {Math.ceil(total / pageSize)}
+                    <span className="product-grid__pagination-info">
+                        Страница {page} из {Math.ceil(total / pageSize)}
                     </span>
                     <button
+                        className="product-grid__pagination-btn"
                         disabled={page >= Math.ceil(total / pageSize)}
                         onClick={() => setPage(page + 1)}
                     >
@@ -53,5 +51,3 @@ export function ProductGrid() {
         </div>
     );
 }
-
-

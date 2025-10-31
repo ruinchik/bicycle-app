@@ -1,4 +1,5 @@
-.theme-toggle {
+.cart-icon {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -13,9 +14,26 @@
     font-size: 1.2rem;
 }
 
-.theme-toggle:hover {
+.cart-icon:hover {
     background: var(--primary);
     color: white;
     transform: scale(1.05);
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.cart-icon__badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    border: 2px solid var(--surface);
 }

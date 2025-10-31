@@ -1,0 +1,108 @@
+.filters {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    height: fit-content;
+}
+
+.filters__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.filters__title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.filters__clear {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.filters__clear:hover {
+    background: var(--background);
+}
+
+.filters__section {
+    margin-bottom: 20px;
+}
+
+.filters__section-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.filters__row {
+    display: block;
+    margin-bottom: 12px;
+}
+
+.filters__row span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--muted-text);
+}
+
+.filters__row select,
+.filters__row input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--background);
+    color: var(--text);
+    font-size: 14px;
+}
+
+.filters__price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filters__price-inputs input {
+    flex: 1;
+}
+
+.filters__price-separator {
+    color: var(--muted-text);
+    font-size: 14px;
+}
+
+.filters__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filters__checkbox input {
+    width: auto;
+}
+.filters__row select:focus,
+.filters__row input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.filters__checkbox input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}

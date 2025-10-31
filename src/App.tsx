@@ -1,49 +1,31 @@
-import './App.css'
-import styled from 'styled-components'
-import { ThemeToggle } from './components/theme/ThemeToggle/ThemeToggle'
-import { Filters } from './components/catalog/Filters/Filters'
-import { Sort } from './components/catalog/Sort/Sort'
-import { ProductGrid } from './components/catalog/ProductGrid/ProductGrid'
-import { CartIcon } from './components/cart/CartIcon/CartIcon'
-
-const Page = styled.div`
-  display: grid;
-  gap: 16px;
-  padding: 16px;
-  width: 100%;
-`
-
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`
-
-const Layout = styled.div`
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 16px;
-`
+import './App.css';
+import { ThemeToggle } from './components/theme/ThemeToggle/ThemeToggle';
+import { Filters } from './components/catalog/Filters/Filters';
+import { Sort } from './components/catalog/Sort/Sort';
+import { ProductGrid } from './components/catalog/ProductGrid/ProductGrid';
+import { CartIcon } from './components/catalog/CartIcon/CartIcon';
 
 function App() {
   return (
-    <Page>
-      <Header>
-        <h2 style={{ margin: 0 }}>Веломагазин</h2>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+    <div className="app">
+      <header className="app__header">
+        <h1 className="app__title">Веломагазин</h1>
+        <div className="app__controls">
           <ThemeToggle />
           <CartIcon />
         </div>
-      </Header>
-      <Layout>
+      </header>
+      
+      <div className="app__layout">
         <Filters />
-        <div style={{ display: 'grid', gap: 12 }}>
+        <div className="app__content">
+          <h1 className="app__page-title">Велосипеды</h1>
           <Sort />
           <ProductGrid />
         </div>
-      </Layout>
-    </Page>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;

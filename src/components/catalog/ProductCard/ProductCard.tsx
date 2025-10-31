@@ -27,6 +27,12 @@ const Title = styled.h3`
 const Price = styled.div`
     font-weight: 700;
 `;
+const Meta = styled.div`
+    display: flex;
+    gap: 8px;
+    color: var(--muted-text);
+    font-size: 12px;
+`;
 
 type Props = { product: Product };
 
@@ -38,6 +44,11 @@ export function ProductCard({ product }: Props) {
             <div>
                 <Title>{product.title}</Title>
                 <div style={{ color: 'var(--muted-text)', fontSize: 12 }}>{product.description}</div>
+                <Meta>
+                    <span>Продано {product.popularity.toLocaleString()}</span>
+                    <span>•</span>
+                    <span>Рейтинг {product.rating.toFixed(1)}</span>
+                </Meta>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Price>{product.price.toLocaleString()} ₽</Price>

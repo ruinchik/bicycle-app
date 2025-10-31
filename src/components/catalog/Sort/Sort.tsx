@@ -6,12 +6,18 @@ const Wrap = styled.div`
     gap: 12px;
     align-items: center;
 `;
+const Label = styled.span`
+    color: var(--muted-text);
+    font-size: 12px;
+    text-transform: uppercase;
+`;
 
 export function Sort() {
     const sort = useCatalogStore((s) => s.sort);
     const setSort = useCatalogStore((s) => s.setSort);
     return (
         <Wrap>
+            <Label>Сортировать по:</Label>
             <select
                 value={sort.key}
                 onChange={(e) => setSort({ key: e.target.value as any, order: sort.order })}
