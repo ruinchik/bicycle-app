@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useCartStore } from '../../../../stores/cartStore';
+import { useCartStore } from '../../../stores/cartStore';
 import './PromoCode.css';
-
 
 export function PromoCode() {
     const [code, setCode] = useState('');
@@ -9,7 +8,8 @@ export function PromoCode() {
     const { promoCode, discount, applyPromoCode, removePromoCode } = useCartStore();
 
     const handleApply = () => {
-        if (applyPromoCode(code)) {
+        const success = applyPromoCode(code);
+        if (success) {
             setError('');
             setCode('');
         } else {
@@ -27,7 +27,11 @@ export function PromoCode() {
             <div className="promo-code promo-code--applied">
                 <div className="promo-code__info">
                     <span className="promo-code__code">Промокод: {promoCode}</span>
-                    <span className="promo-code__discount">-{discount}{discount <= 100 ? '%' : '₽'}</span>
+                    <span className="promo-code__discount">
+                        -{discount}
+                        {/* Определяем тип скидки по значению discount */}
+                        {discount <= 100 ? '%' : '₽'}
+                    </span>
                 </div>
                 <button className="promo-code__remove" onClick={handleRemove}>
                     ×

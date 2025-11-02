@@ -14,7 +14,7 @@ const mapToCssVars = (theme: Record<string, string>) => ({
     '--border': theme.border,
 });
 
-export function ThemingProvider({ children }: Props) { // ← убедитесь что export есть
+export function ThemingProvider({ children }: Props) {
     const mode = useThemeStore((s) => s.mode);
     const theme = mode === 'dark' ? darkTheme : lightTheme;
 
@@ -28,4 +28,3 @@ export function ThemingProvider({ children }: Props) { // ← убедитесь
 
     return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
-

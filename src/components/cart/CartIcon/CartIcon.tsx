@@ -1,31 +1,16 @@
-import { useState, useEffect } from 'react';
-import { useCartStore } from '../../../stores';
+import { useCartStore } from '../../../stores/cartStore';
 import './CartIcon.css';
 
 export function CartIcon() {
-    const [isBouncing, setIsBouncing] = useState(false);
-    const totalQty = useCartStore((s) => s.totalQty());
-    const openCart = useCartStore((s) => s.openCart);
-    const prevTotalQty = useCartStore((s) => {
-        // Это нужно для отслеживания изменений количества
-        return s.totalQty();
-    });
-    
-    useEffect(() => {
-        if (totalQty > prevTotalQty) {
-            setIsBouncing(true);
-            setTimeout(() => setIsBouncing(false), 500);
-        }
-    }, [totalQty, prevTotalQty]);
+    const { totalQty, openCart } = useCartStore();
+
+    const handleClick = () => {
+        openCart(); // Открываем модальное окно корзины
+    };
 
     return (
-        <button className="cart-icon" onClick={openCart} aria-label="Корзина">
-            🛒
-            {totalQty > 0 && (
-                <span className={`cart-icon__badge ${isBouncing ? 'cart-icon__badge--bounce' : ''}`}>
-                    {totalQty}
-                </span>
-            )}
+        <button className="cart-icon" onClick={handleClick}>
+            🛒 Корзина ({totalQty()})
         </button>
     );
 }

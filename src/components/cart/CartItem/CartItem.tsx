@@ -1,8 +1,7 @@
 import React from 'react';
-import { useCartStore } from '../../../../stores/cartStore';
-import { type CartItem as CartItemType } from '../../../../types';
+import { useCartStore } from '../../../stores/cartStore';
+import { type CartItem as CartItemType } from '../../../types';
 import './CartItem.css';
-
 
 type Props = {
     item: CartItemType;

@@ -20,39 +20,50 @@ export function Sort() {
         setSort({ ...sort, order });
     };
 
+    // Определяем labels для порядка в зависимости от типа сортировки
+    const getOrderLabels = (): [string, string] => {
+        if (sort.key === 'price') {
+            return ['Дешевле', 'Дороже'];
+        }
+        return ['Возр.', 'Убыв.'];
+    };
+
+    const [ascLabel, descLabel] = getOrderLabels();
+
     return (
         <div className="sort">
             <span className="sort__label">Сортировка:</span>
             
-            <div className="sort__options">
-                {SORT_OPTIONS.map(option => (
-                    <button
-                        key={option.key}
-                        className={`sort__option ${sort.key === option.key ? 'sort__option--active' : ''}`}
-                        onClick={() => handleKeyChange(option.key)}
-                    >
-                        {option.label}
-                    </button>
-                ))}
-            </div>
+            <div className="sort__controls">
+                <div className="sort__options">
+                    {SORT_OPTIONS.map(option => (
+                        <button
+                            key={option.key}
+                            className={`sort__option ${sort.key === option.key ? 'sort__option--active' : ''}`}
+                            onClick={() => handleKeyChange(option.key)}
+                        >
+                            {option.label}
+                        </button>
+                    ))}
+                </div>
 
-            <div className="sort__order">
-                <button
-                    className={`sort__order-btn ${sort.order === 'asc' ? 'sort__order-btn--active' : ''}`}
-                    onClick={() => handleOrderChange('asc')}
-                    aria-label="По возрастанию"
-                >
-                    ↑ Возр.
-                </button>
-                <button
-                    className={`sort__order-btn ${sort.order === 'desc' ? 'sort__order-btn--active' : ''}`}
-                    onClick={() => handleOrderChange('desc')}
-                    aria-label="По убыванию"
-                >
-                    ↓ Убыв.
-                </button>
+                <div className="sort__order">
+                    <button
+                        className={`sort__order-btn ${sort.order === 'asc' ? 'sort__order-btn--active' : ''}`}
+                        onClick={() => handleOrderChange('asc')}
+                        aria-label={ascLabel}
+                    >
+                        {ascLabel}
+                    </button>
+                    <button
+                        className={`sort__order-btn ${sort.order === 'desc' ? 'sort__order-btn--active' : ''}`}
+                        onClick={() => handleOrderChange('desc')}
+                        aria-label={descLabel}
+                    >
+                        {descLabel}
+                    </button>
+                </div>
             </div>
         </div>
     );
 }
-

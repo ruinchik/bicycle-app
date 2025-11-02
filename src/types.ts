@@ -18,6 +18,7 @@ export type Product = {
 export type PriceRange = { min?: number; max?: number };
 
 export type CatalogFilters = {
+    search?: string; // ← ДОБАВЛЕНО поле для поиска
     type?: Product['type'];
     manufacturer?: string;
     price?: PriceRange;
@@ -37,4 +38,8 @@ export type PaginatedResult<T> = {
     pageSize: number;
 };
 
-
+export type CartItem = {
+    id: ProductId;
+    product: Product;
+    qty: number;
+};

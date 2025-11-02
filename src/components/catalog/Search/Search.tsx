@@ -8,19 +8,11 @@ export function Search() {
 
     const handleSearch = (value: string) => {
         setSearchTerm(value);
-        // Здесь можно добавить поиск по названию или описанию
-        // Пока просто сбрасываем другие фильтры при поиске
-        if (value.trim()) {
-            setFilters({
-                manufacturer: value,
-                type: undefined,
-                frameSize: undefined,
-                price: {},
-                inStock: undefined
-            });
-        } else {
-            setFilters({});
-        }
+        // Правильная логика поиска - отдельное поле search
+        setFilters({
+            search: value.trim() || undefined
+            // Не сбрасываем другие фильтры при поиске
+        });
     };
 
     return (

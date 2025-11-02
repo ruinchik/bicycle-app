@@ -1,14 +1,16 @@
-import { useThemeStore } from '../../../stores/themeStore';
 import './ThemeToggle.css';
+import { useThemeStore } from '../../../stores/themeStore';
 
 export function ThemeToggle() {
-    const mode = useThemeStore((s) => s.mode);
-    const toggle = useThemeStore((s) => s.toggle);
+    const { mode, toggle } = useThemeStore();
+
     return (
-        <button className="theme-toggle" onClick={toggle} aria-label="Переключить тему">
-            {mode === 'light' ? '🌞' : '🌙'}
+        <button 
+            className="theme-toggle"
+            onClick={toggle}
+            aria-label="Переключить тему"
+        >
+            {mode === 'light' ? '🌙' : '☀️'}
         </button>
     );
 }
-
-

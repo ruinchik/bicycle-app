@@ -1,56 +1,17 @@
 .cart-icon {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--surface);
-    color: var(--text);
-    border: 2px solid var(--primary);
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .cart-icon:hover {
-    background: var(--primary);
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
-}
-
-.cart-icon__badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: var(--primary);
-    color: white;
-    border-radius: 50%;
-    min-width: 22px;
-    height: 22px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    border: 2px solid var(--surface);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.cart-icon__badge--bounce {
-    animation: bounce 0.5s ease;
+    background: #0056b3;
 }

@@ -10,11 +10,10 @@ type ThemeState = {
 
 export const useThemeStore = create<ThemeState>((set) => ({
     mode: 'light',
-    toggle: () => set((s) => ({ mode: s.mode === 'light' ? 'dark' : 'light' })),
+    toggle: () => set((s) => ({ 
+        mode: s.mode === 'light' ? 'dark' : 'light'  // ← исправлено!
+    })),
     setMode: (mode) => set({ mode }),
 }));
 
 export type { ThemeMode };
-
-
-
