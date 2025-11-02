@@ -43,7 +43,7 @@
     font-weight: 500;
     white-space: nowrap;
     flex: 1;
-    min-width: 120px;
+    min-width: 140px; /* Увеличили для "По популярности" */
     text-align: center;
 }
 
@@ -60,13 +60,14 @@
     box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
 }
 
+/* ОБНОВЛЕННЫЙ БЛОК СТРЕЛОЧЕК */
 .sort__order {
     display: flex;
     border: 2px solid var(--border);
     border-radius: 8px;
     overflow: hidden;
     background: var(--bg);
-    min-width: 160px; /* Увеличили для "Дешевле/Дороже" */
+    min-width: 80px; /* Уменьшили для стрелочек */
 }
 
 .sort__order-btn {
@@ -75,12 +76,15 @@
     padding: 10px 12px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px; /* Увеличили для стрелочек */
+    font-weight: 600;
     color: var(--text);
     flex: 1;
     text-align: center;
-    min-width: 80px; /* Увеличили для длинных подписей */
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sort__order-btn:hover {
@@ -93,7 +97,7 @@
 }
 
 .sort__order-btn:first-child {
-    border-right: 2px solid var(--border);
+    border-right: 1px solid var(--border); /* Утончили разделитель */
 }
 
 /* Адаптивность */
@@ -119,12 +123,8 @@
     }
     
     .sort__option {
-        min-width: 100px;
+        min-width: 120px;
         flex: 0 1 auto;
-    }
-    
-    .sort__order {
-        min-width: 140px;
     }
 }
 
@@ -147,10 +147,6 @@
         width: 100%;
         min-width: auto;
     }
-    
-    .sort__order-btn {
-        min-width: auto;
-    }
 }
 
 @media (max-width: 480px) {
@@ -166,6 +162,6 @@
     
     .sort__order-btn {
         padding: 8px 10px;
-        font-size: 13px;
+        font-size: 14px;
     }
 }

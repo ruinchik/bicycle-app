@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { type CatalogFilters, type CatalogSort, type PaginatedResult, type Product } from '../types';
-import { fetchProducts } from '../api/products';
+import { fetchProductsMock } from '../mocks/products';
 
 type CatalogState = {
     items: Product[];
@@ -28,19 +28,53 @@ export const useCatalogStore = create<CatalogState>((set, get) => ({
     sort: defaultSort,
     isLoading: false,
     error: undefined,
-    setFilters: (f) => set((s) => ({ filters: { ...s.filters, ...f }, page: 1 })),
-    setSort: (s) => set({ sort: s, page: 1 }),
-    setPage: (p) => set({ page: p }),
+    
+    setFilters: (f) => {
+        set((state) => ({ 
+            filters: { ...state.filters, ...f }, 
+            page: 1  // Сбрасываем на первую страницу при изменении фильтров
+        }));
+        // Автоматически загружаем данные с новыми фильтрами
+        get().load();
+    },
+    
+    setSort: (s) => {
+        set({ 
+            sort: s, 
+            page: 1  // Сбрасываем на первую страницу при изменении сортировки
+        });
+        // Автоматически загружаем данные с новой сортировкой
+        get().load();
+    },
+    
+    setPage: (p) => {
+        set({ page: p });
+        // Автоматически загружаем данные для новой страницы
+        get().load();
+    },
+    
     load: async () => {
         const { page, pageSize, filters, sort } = get();
         set({ isLoading: true, error: undefined });
+        
         try {
-            const res: PaginatedResult<Product> = await fetchProducts({ page, pageSize, filters, sort });
-            set({ items: res.items, total: res.total, isLoading: false });
+            const res: PaginatedResult<Product> = await fetchProductsMock({ 
+                page, 
+                pageSize, 
+                filters, 
+                sort 
+            });
+            
+            set({ 
+                items: res.items, 
+                total: res.total, 
+                isLoading: false 
+            });
         } catch (e) {
-            set({ isLoading: false, error: e instanceof Error ? e.message : 'Unknown error' });
+            set({ 
+                isLoading: false, 
+                error: e instanceof Error ? e.message : 'Unknown error' 
+            });
         }
     },
 }));
-
-

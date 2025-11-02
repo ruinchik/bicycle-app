@@ -20,15 +20,13 @@ export function Sort() {
         setSort({ ...sort, order });
     };
 
-    // Определяем labels для порядка в зависимости от типа сортировки
-    const getOrderLabels = (): [string, string] => {
+    // Функция для получения подсказки при наведении
+    const getOrderTooltip = (): string => {
         if (sort.key === 'price') {
-            return ['Дешевле', 'Дороже'];
+            return sort.order === 'asc' ? 'Сначала дешевые' : 'Сначала дорогие';
         }
-        return ['Возр.', 'Убыв.'];
+        return sort.order === 'asc' ? 'По возрастанию' : 'По убыванию';
     };
-
-    const [ascLabel, descLabel] = getOrderLabels();
 
     return (
         <div className="sort">
@@ -47,20 +45,20 @@ export function Sort() {
                     ))}
                 </div>
 
-                <div className="sort__order">
+                <div className="sort__order" title={getOrderTooltip()}>
                     <button
                         className={`sort__order-btn ${sort.order === 'asc' ? 'sort__order-btn--active' : ''}`}
                         onClick={() => handleOrderChange('asc')}
-                        aria-label={ascLabel}
+                        aria-label={sort.key === 'price' ? 'Сначала дешевые' : 'По возрастанию'}
                     >
-                        {ascLabel}
+                        ↑
                     </button>
                     <button
                         className={`sort__order-btn ${sort.order === 'desc' ? 'sort__order-btn--active' : ''}`}
                         onClick={() => handleOrderChange('desc')}
-                        aria-label={descLabel}
+                        aria-label={sort.key === 'price' ? 'Сначала дорогие' : 'По убыванию'}
                     >
-                        {descLabel}
+                        ↓
                     </button>
                 </div>
             </div>

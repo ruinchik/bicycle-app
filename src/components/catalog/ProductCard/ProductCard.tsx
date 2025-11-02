@@ -9,6 +9,8 @@ type Props = {
 
 export function ProductCard({ product }: Props) {
     const [isAdded, setIsAdded] = useState(false);
+    const [imageError, setImageError] = useState(false);
+    const [imageLoading, setImageLoading] = useState(true);
     const addItem = useCartStore((s) => s.addItem);
 
     const handleAddToCart = () => {
@@ -17,12 +19,46 @@ export function ProductCard({ product }: Props) {
         setTimeout(() => setIsAdded(false), 1000);
     };
 
+    const handleImageError = () => {
+        setImageError(true);
+        setImageLoading(false);
+    };
+
+    const handleImageLoad = () => {
+        setImageLoading(false);
+    };
+
     return (
         <div className="product-card">
             <div className="product-card__image">
-                <img src={product.imageUrl} alt={product.title} />
+                {imageError ? (
+                    <div className="product-card__image-fallback">
+                        <span>Картинка</span>
+                    </div>
+                ) : (
+                    <>
+                        {imageLoading && (
+                            <div className="product-card__image-loading">
+                                <div className="loading-spinner"></div>
+                            </div>
+                        )}
+                        <img 
+                            src={product.imageUrl} 
+                            alt={product.title}
+                            onError={handleImageError}
+                            onLoad={handleImageLoad}
+                            style={{ opacity: imageLoading ? 0 : 1 }}
+                        />
+                    </>
+                )}
+                
+                {/* Бейдж "Новинка" - сдвинут ниже */}
                 {product.isNew && <span className="product-card__badge">Новинка</span>}
-                {!product.inStock && <div className="product-card__out-of-stock">Нет в наличии</div>}
+                
+                {/* Overlay "Нет в наличии" */}
+                {!product.inStock && (
+                    <div className="product-card__out-of-stock">Нет в наличии</div>
+                )}
             </div>
             
             <div className="product-card__content">
@@ -49,6 +85,7 @@ export function ProductCard({ product }: Props) {
                         className={`product-card__add-btn ${isAdded ? 'product-card__add-btn--added' : ''}`}
                         onClick={handleAddToCart}
                         disabled={!product.inStock || isAdded}
+                        aria-label={`Добавить ${product.title} в корзину`}
                     >
                         {isAdded ? '✓ Добавлено' : (product.inStock ? 'В корзину' : 'Нет в наличии')}
                     </button>
